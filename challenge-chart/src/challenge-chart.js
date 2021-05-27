@@ -80,7 +80,20 @@ class ChallengeChart extends LitElement {
   }
 
   render() {
-    return html`<canvas id="chart"></canvas>`;
+    return html`
+      <canvas id="chart"></canvas>
+      <form>
+        <label>
+          Select sample size:
+          <select>
+            <option>small</option>
+            <option>medium</option>
+            <option>large</option>
+          </select>
+        </label>
+        <button>load data</button>
+      </form>
+      `;
   }
 }
 customElements.define('challenge-chart', ChallengeChart);

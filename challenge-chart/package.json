@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild ./src/challenge-chart.js --bundle --minify --outdir=dist"
+    "build": "esbuild ./src/challenge-chart.js --bundle --minify --outdir=dist",
+    "serve": "es-dev-server --app-index ./dist/index.html --node-resolve --watch --open"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +14,8 @@
     "chart.js": "^3.2.1",
     "esbuild": "^0.12.1",
     "lit": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "es-dev-server": "^2.1.0"
   }
 }
