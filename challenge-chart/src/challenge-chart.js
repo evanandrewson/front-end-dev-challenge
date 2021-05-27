@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ChallengeDataService } from '../../ChallengeDataService.js';
 
 import {
   Chart,
@@ -15,7 +16,10 @@ class ChallengeChart extends LitElement {
   }
 
   static get properties() {
-    return { data: Array };
+    return { 
+      data: Array,
+      sampleSize: String
+    };
   }
 
   constructor() {
@@ -47,6 +51,7 @@ class ChallengeChart extends LitElement {
       },
     };
     this.chart = new Chart(this.shadowRoot.querySelector('#chart'), this.chartOptions);
+    this.sampleSize = 'small';
   }
 
   updated(changedProperties) {
@@ -79,13 +84,29 @@ class ChallengeChart extends LitElement {
     this.chart.update();
   }
 
+  async _onSubmit(e) {
+    e.preventDefault();
+    console.log(this.sampleSize);
+    // const dataService = new ChallengeDataService();
+    // const data = await dataService.getDataSet(this.state.sampleSize)
+    // console.log(data);
+    // this.data = data;
+    // this._updateData();
+
+  }
+
+  _onChange(e) {
+    const { value } = e.target;
+    this.sampleSize = value;
+  }
+
   render() {
     return html`
       <canvas id="chart"></canvas>
-      <form>
+      <form @submit=${this._onSubmit}>
         <label>
           Select sample size:
-          <select>
+          <select @change=${this._onChange}>
             <option>small</option>
             <option>medium</option>
             <option>large</option>
