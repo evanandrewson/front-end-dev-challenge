@@ -86,12 +86,18 @@ class ChallengeChart extends LitElement {
 
   async _onSubmit(e) {
     e.preventDefault();
-    console.log(this.sampleSize);
-    // const dataService = new ChallengeDataService();
-    // const data = await dataService.getDataSet(this.state.sampleSize)
-    // console.log(data);
-    // this.data = data;
-    // this._updateData();
+    const dataService = new ChallengeDataService();
+    const challengeDataSet = await dataService.getDataSet(this.sampleSize)
+    const xColumn = challengeDataSet.xColumn.values;
+    const yColumn = challengeDataSet.yColumn.values;
+    const data = xColumn.map((xValue, i) => {
+      return {
+        x: xValue,
+        y: yColumn[i]
+      }
+    })
+    this.data = data;
+    this._updateData();
 
   }
 
