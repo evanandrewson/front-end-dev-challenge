@@ -12,13 +12,18 @@ import {
 
 class ChallengeChart extends LitElement {
   static get styles() {
-    return css``;
+    return css`
+      table, td {
+        border: 1px solid black;
+      }
+    `;
   }
 
   static get properties() {
     return { 
       data: Array,
-      sampleSize: String
+      sampleSize: String,
+      hasData: Boolean
     };
   }
 
@@ -97,6 +102,7 @@ class ChallengeChart extends LitElement {
       }
     })
     this.data = data;
+    this.hasData = true;
     this._updateData();
 
   }
@@ -120,6 +126,20 @@ class ChallengeChart extends LitElement {
         </label>
         <button>load data</button>
       </form>
+      ${this.hasData &&
+        html`<table>
+          <tr>
+            <th>X</th>
+            <th>Y</th>
+          </tr>
+          ${this.data.map(point => {
+            return html`<tr>
+              <td>${point.x}</td>
+              <td>${point.y}</td>
+            </tr>`;
+          })}
+        </table>`
+      }
       `;
   }
 }
